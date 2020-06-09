@@ -1,0 +1,42 @@
+- include: update.yml
+- name: Docker -> Add GPG key
+  when: ansible_os_family == 'Debian'
+  become: yes
+  become_user: root
+  apt_key:
+    url: https://download.docker.com/linux/ubuntu/gpg
+- name: Docker -> Add apt repository
+  when: ansible_os_family == 'Debian'
+  become: yes
+  become_user: root
+  apt_repository:
+    repo: "deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable"
+- include: update.yml
+- name: Docker -> Install Docker packages for Docker community edition -> via apt
+  when: ansible_os_family == 'Debian'
+  become: yes
+  become_user: root
+  apt:
+    pkg: "{{ item }}"
+    state: latest
+  loop:
+    - docker-ce 
+    - docker-ce-cli
+    - containerd.io
+- name: Docker -> Install Docker packages for Docker community edition- > via dnf
+  when: ansible_os_family == 'RedHat'
+  become: yes
+  become_user: root
+  dnf:
+    pkg: "{{ item }}"
+    state: latest
+  loop:
+    - docker-ce 
+    - docker-ce-cli
+    - containerd.io
+- name: Docker -> Install Docker for Python
+  become: yes
+  become_user: root
+  pip:
+    executable: pip3
+    name: docker
