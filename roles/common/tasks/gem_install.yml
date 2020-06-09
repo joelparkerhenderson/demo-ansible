@@ -1,0 +1,56 @@
+- include: update.yml
+- name: gem -> install -> prerequisites -> apt
+  when: ansible_os_family == 'Debian'
+  become: yes
+  become_user: root
+  apt:
+    pkg: "{{ item }}"
+    state: latest
+  loop:
+    # For all gems
+    - ruby
+    - ruby-dev
+    # For native gems
+    - build-essential
+    - patch
+    ## For nokogiri
+    - zlib1g-dev
+    - liblzma-dev
+    - libgmp-dev
+    ## For pg
+    - libpq-dev
+- name: gem -> install -> prerequisites -> dnf
+  when: ansible_os_family == 'RedHat'
+  become: yes
+  become_user: root
+  dnf:
+    name: "{{ item }}"
+    state: latest
+  loop:
+    - ruby
+    - ruby-devel
+    # For native gems
+    - build-essential
+    - patch
+    ## For nokogiri
+    - zlib1g-dev
+    - liblzma-dev
+    - libgmp-dev
+    ## For pg
+    - libpq-dev
+- name: gem -> install -> packages
+  become: yes
+  become_user: root
+  gem:
+    name: "{{ item }}"
+    state: latest
+    user_install: no
+  loop:
+    # nokogiri: Parser for HTML and XML
+    - nokogiri
+    # pg: PostgreSQL interface for Ruby
+    - pg
+    # rails: Ruby on Rails web framework
+    - rails
+    # rake: a make-like build utility
+    - rake
