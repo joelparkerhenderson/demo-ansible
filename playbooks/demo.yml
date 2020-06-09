@@ -1,0 +1,19 @@
+- hosts: www.joelparkerhenderson.com
+  tasks:
+  # System package managers
+  - include: ../roles/common/tasks/apt_setup.yml
+  - include: ../roles/common/tasks/apt_install.yml
+  - include: ../roles/common/tasks/dnf_setup.yml
+  - include: ../roles/common/tasks/dnf_install.yml
+  # Requirements for cargo package manager
+  - include: ../roles/common/tasks/rust_setup.yml
+  - include: ../roles/common/tasks/rust_setup_via_nightly.yml
+  # Platform package managers
+  - include: ../roles/common/tasks/cargo_install.yml
+  - include: ../roles/common/tasks/npm_insall.yml
+  - include: ../roles/common/tasks/gem_install.yml
+  - include: ../roles/common/tasks/pip_install.yml
+  # A
+  - include: ../roles/common/tasks/docker_setup.yml
+  - include: ../roles/common/tasks/elixir_setup.yml
+  - include: ../roles/common/tasks/nginx_setup.yml
