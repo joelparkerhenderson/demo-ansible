@@ -1,0 +1,11 @@
+- name: Update dnf via module
+  when: ansible_os_family == 'RedHat'
+  become: yes
+  become_user: root
+  dnf:
+    name: '*'
+    state: latest
+    update_cache: yes
+    upgrade: full
+    autoremove: yes
+    purge: yes

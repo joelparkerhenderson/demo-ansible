@@ -1,0 +1,9 @@
+- name: Update dnf via command
+  when: ansible_os_family == 'RedHat'
+  become: yes
+  become_user: root
+  command: "dnf --quiet --assumeyes {{ item }}"
+  loop:
+    - "autoremove"
+    - "upgrade"
+    - "autoremove"
