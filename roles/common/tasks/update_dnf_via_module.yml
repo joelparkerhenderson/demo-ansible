@@ -1,4 +1,4 @@
-- name: Update dnf via module
+- name: Update dnf via module -> latest
   when: ansible_os_family == 'RedHat'
   become: yes
   become_user: root
@@ -6,4 +6,7 @@
     name: '*'
     state: latest
     update_cache: yes
+- name: Update dnf via module -> autoremove
+  dnf:
     autoremove: yes
+  
