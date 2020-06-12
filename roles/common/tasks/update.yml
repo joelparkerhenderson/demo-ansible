@@ -1,5 +1,8 @@
 - include: update_apt_via_module.yml
   when: ansible_os_family == 'Debian'
+- include: update_apt_via_command.yml
+  when: ansible_os_family == 'Debian'
 - include: update_dnf_via_module.yml
   when: ansible_os_family == 'RedHat'
-  
+- include: update_dnf_via_command.yml
+  when: ansible_os_family == 'RedHat'
