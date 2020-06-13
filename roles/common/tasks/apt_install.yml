@@ -24,6 +24,7 @@
     # Libs
     - ssl-cert
     - libffi-dev
+    - libgeos-dev
     - libssl-dev
     - libv8-dev
     - libxml2-dev
