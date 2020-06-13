@@ -33,22 +33,28 @@
       # Programming
       - gcc
       - geos-devel
-      - java-latest-openjdk.x86_64
       - mysql-devel
       - perl
-      - postgresql-devel 
+      - postgresql-devel
+      - v8-devel
+      # Java-related
+      - java-latest-openjdk.x86_64
+      # Node-related
+      - nodejs
+      - npm
+      # Python-related
       - python3
       - python3-devel
       #- python3-geopandas
       - python3-numpy
       - python3-pip
       - python3-tox
+      # Ruby-related
       - ruby
       - ruby-devel
-      - v8-devel
-      # Node-related
-      - nodejs
-      - npm   
+      # Rust-related
+      - rust
+      - cargo
       # Utiltiies
       - ack
       - atop
