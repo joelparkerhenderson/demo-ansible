@@ -75,7 +75,7 @@
     # funcsigs: ?
     - funcsigs
     # geopandas: Geographic pandas extensions.
-    - geopandas
+    #- geopandas
     # git-filter-repo: Git tool to filter repo files, better than git filter-branch.
     - git-filter-repo
     # hg-git: Mercurial-to-git bridge for version control.
