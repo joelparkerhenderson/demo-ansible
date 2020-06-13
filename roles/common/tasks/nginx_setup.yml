@@ -36,7 +36,7 @@
   apt:
     pkg: nginx
     state: latest
-  - name: NGINX -> Install via dnf packages
+- name: NGINX -> Install via dnf packages
   when: ansible_os_family == 'RedHat'
   become: yes
   become_user: root
