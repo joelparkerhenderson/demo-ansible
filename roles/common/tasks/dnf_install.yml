@@ -80,6 +80,7 @@
       - unzip
       - uuid
       - uuid-devel
+      - zoxide
       # Services
       - monit
       # NGINX webserver related
