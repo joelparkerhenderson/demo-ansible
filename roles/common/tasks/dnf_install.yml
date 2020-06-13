@@ -11,17 +11,15 @@
       - gcc
       - git
       - git-core
-      - gnupg-agent
+      - git-review
       - make
       - openssl
+      - openssl-devel
       - patch
-      - software-properties-common
       - xfsprogs
       # Libs
-      - ssl-cert
       - libffi-devel
-      - libssl-devel
-      - libv8-devel
+      - libjpeg-turbo-devel
       - libxml2-devel
       - libxslt-devel
       # Fetching
@@ -34,59 +32,50 @@
       - vim
       # Programming
       - gcc
+      - geos-devel
+      - java-latest-openjdk.x86_64
+      - mysql-devel
       - perl
+      - postgresql-devel 
       - python3
       - python3-devel
       - python3-pip
+      - python3-tox
       - ruby
       - ruby-devel
-      - default-jre
-      - default-jdk
+      - v8-devel
       # Node-related
       - nodejs
       - npm   
       # Utiltiies
-      - ack-grep
+      - ack
       - atop
       - elinks
       - fd-find
+      - gettext
       - gnupg
-      - gnupg-agent
+      - graphviz
       - htop
       - jq
       - lynx
       - most
       - mutt
       - nginx
-      - pcregrep
-      - readline-common
+      - pcre2
+      - readline-devel
       - ripgrep
       - rsync
       - screen
-      - shellcheck
+      - ShellCheck
       - tmux
       - traceroute
-      - unrar-free
       - unzip
       - uuid
       - uuid-devel
-      - uuid-runtime
       # Services
       - monit
-      # Apache webserver related
-      - apache2
-      - apache2-doc
-      - apache2-utils
-      - libapr1
-      - libaprutil1
-      - libpq5
-      - libaprutil1-devel
-      - libapr1-devel
-      - libexpat1
-      - ssl-cert
       # NGINX webserver related
       - nginx
       # Z shell
       - zsh
-      - zsh-doc
     state: latest
