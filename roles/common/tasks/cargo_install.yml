@@ -2,11 +2,435 @@
 - name: cargo -> install -> rust
   become: yes
   become_user: root
-  command: command -v "cargo" >/dev/null 2>&1 || curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+  shell: command -v "cargo" >/dev/null 2>&1 || curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 - name: cargo -> install -> packages
   become: yes
   become_user: root
-  command: cargo install "{{ item }}"
+  shell: source ~/.cargo/env && cargo install --list | grep -qm1 || cargo install "{{ item }}"
+  loop_control:
+    extended: yes
+    label: "name:{{ item }}"
+    # {{ ansible_loop.index1 }}/{{ ansible_loop.length }}
   loop:
-    # Drill is a HTTP load testing application written in Rust inspired by Ansible syntax 
+    # Display current network utilization by process, connection and remote IP/hostname 
+    - bandwhich
+    # A cat(1) clone with wings.
+    - bat
+    # A cross-platform graphical process/system monitor with a customizable interface and a multitude of features. Supports Linux, macOS, and Windows.
+    - bottom
+    # fd is a simple, fast and user-friendly alternative to find.
+    - fd-find
+    # Faster workspace management.
+    - fw
+    # blazing fast terminal-ui for git.
+    - gitui
+    # Fast, lag-free terminal file browser
+    - hunter
+    # JSON query language CLI tool.
+    - jql
+    # Fast indexing and querying your filesystem. Replaces locate / mlocate / updatedb.
+    - lolcate-rs
+    # ls command with a lot of pretty colors and some other stuff.
+    - lsd
+    # cat for markdown: Show markdown documents in terminals.
+    - mdcat
+    # Monitor that network is reachable; in case of failure, run a command.
+    - pingkeeper
+    # modern replacement for ps.
+    - procs
+    # Project management CLI for git repos
+    - projector
+    # ripgrep is a line-oriented search tool that recursively searches your current directory for a regex pattern while respecting your gitignore rules.
+    - ripgrep
+    # An intuitive find & replace CLI.
+    - sd
+    # Fast minimal infinitely customizable prompt for any shell.
+    - starship
+    # Fetch and show tldr help pages for many CLI commands. Full featured offline client with caching support. .
+    - tealdeer
+    # Watch files for modifications then execute commands.
+    - watchexec
+    # A faster way to navigate your filesystem.
+    - zoxide
+    ### TODO BELOW ###
+    # Cargo plugin that adds the 'do' subcommand to let you run multiple cargo commands by running e.g. `cargo do clean, build.
+    - cargo-do
+    # Cargo subcommand that visualizes a crate's dependency graph in a tree-like format
+    - cargo-tree
+    # Watch over your Cargo project’s source.
+    - cargo-watch
+    # A macro to ergonomically define an item depending on a large number of #[cfg] parameters.
+    - cfg-if
+    #  Date and time library for Rust.
+    - chrono = { version, features = ["serde"] }
+    # Command Line Argument Parser that is simple to use, efficient, and full-featured.
+    - clap = {version, features = ["yaml"]}
+    # A common utility library to control CLI colorization.
+    - clicolors-control
+    # Simple way to add colors in your terminal.
+    - colored
+    # Idiomatic Rust wrappers for Mac OS X's CommonCrypto library.
+    - commoncrypto
+    # FFI bindings to Mac OS X's CommonCrypto library.
+    - commoncrypto-sys
+    # A 100% CommonMark-compatible GitHub Flavored Markdown parser and formatter.
+    - comrak
+    # A terminal and console abstraction for Rust.
+    - console
+    # Fast inspection of binary buffers to guess/determine the encoding.
+    - content_inspector
+    # HTTP cookie parsing and cookie jar management. Supports signed and private (encrypted, authenticated) jars.
+    - cookie
+    # Implementation of Cookie storage and retrieval per RFC6265.
+    - cookie_store
+    # Bindings to Core Foundation for macOS.
+    - core-foundation
+    # Bindings to Core Foundation for macOS.
+    - core-foundation-sys
+    # Fast CSV parsing with support for serde.
+    - csv
+    # Rust bindings to libcurl for making HTTP requests.
+    - curl
+    # A proc-macro library for reading attributes into structs when implementing custom derives.
+    - darling
+    # Rust macro to automatically implement the builder pattern for arbitrary structs.
+    - derive_builder
+    # Diesel: A safe, extensible ORM and Query Builder for Rust.
+    #
+    #   * chrono: for time data types
+    #   * network-address: for IP address data types
+    #   * numeric: for numeric data types, such as decimals
+    #   * postgres: for PostgreSQL databases
+    #   * sqlite: for SQLite databases
+    #   * r2d2: for Rust connection pooling optimizations
+    #   * serde_json: for JSON data types
+    #   * uuid: for UUID data types
+    #
+    - diesel = { version = "1.4.2", features = ["128-column-tables", "chrono", "network-address", "numeric", "postgres", "sqlite", "r2d2", "serde_json", "uuid", "url"] }
+    # Provides the CLI for the Diesel crate
+    - diesel_cli
+    # Platform-specific standard locations of directories.
+    - directories
+    # Platform-specific standard locations of directories.
+    - dirs
+    # A `dotenv` implementation for Rust.
+    - dotenv = "0.9.0"
+    # Drill is a HTTP load testing application written in Rust inspired by Ansible syntax
     - drill
+    # Fast functions for printing floating-point primitives to an io::Write.
+    - dtoa
+    # A Gecko-oriented implementation of the Encoding Standard.
+    - encoding_rs
+    # A logging implementation for `log` which is configured via an environment variable.
+    - env_logger
+    # Yet another error boilerplate library.
+    - error-chain
+    # Platform-agnostic accessors of timestamps in File metadata
+    - filetime
+    # FixedBitSet is a simple bitset collection.
+    - fixedbitset
+    # Fowler–Noll–Vo hash function.
+    - fnv
+    # Channels for asynchronous communication using futures-rs.
+    - futures-channel
+    # The core traits and types in for the `futures` library..
+    - futures-core
+    # The `AsyncRead`, `AsyncWrite`, `AsyncSeek`, and `AsyncBufRead` traits for the futures-rs library.
+    - futures-io
+    # The asynchronous `Sink` trait for the futures-rs library.
+    - futures-sink
+    # Tools for working with tasks.
+    - futures-task
+    # Common utilities and extension traits for the futures-rs library.
+    - futures-util
+    # Rust bindings to the fsevent-sys macOS API for file changes notifications
+    - fsevent
+    # Cross-platform library for retrieving random data from system source.
+    - getrandom
+    # Bindings to libgit2 for interoperating with git repositories.
+    - git2
+    # Support for matching file paths against Unix shell style patterns.
+    - glob
+    # Cross platform single glob and glob set matching.
+    - globset
+    # An HTTP/2.0 client and server.
+    - h2
+    # A better xdg-utils
+    - handlr
+    # Heck is a case conversion library.
+    - heck
+    # Encode and decode data to/from hexadecimal representation.
+    - hex
+    # Shared definitions of home directories.
+    - home
+    # A set of types for representing HTTP requests and responses.
+    - http
+    # Trait representing an asynchronous, streaming, HTTP request or response body.
+    - http-body
+    # A tiny, safe, speedy, zero-copy HTTP/1.x parser.
+    - httparse
+    # A parser and formatter for std::time::{Duration, SystemTime}.
+    - humantime
+    # A fast and correct HTTP library.
+    - hyper
+    # Hyper native-tls support.
+    - hyper-native-tls
+    # Default TLS implementation for use with hyper.
+    - hyper-tls
+    # Utility for applying case rules to Rust identifiers.
+    - ident_case
+    # IDNA (Internationalizing Domain Names in Applications).
+    - idna
+    # A fast library for efficiently matching ignore files such as `.gitignore` against file paths.
+    - ignore
+    # A hash table with consistent order and fast iteration.
+    - indexmap
+    # Fast functions for printing integer primitives to an io::Write.
+    - itoa
+    # Language tags for Rust.
+    - language-tags
+    # A macro for declaring lazily evaluated statics in Rust.
+    - lazy_static
+    # Lexical, to- and from-string conversion routines.
+    - lexical-core
+    # SQLlite library.
+    - libsqlite3-sys = { version, features = ["bundled"] }
+    # Raw FFI bindings to platform libraries like libc.
+    - libc
+    # FFI bindings for libnghttp2 (nghttp2).
+    - libnghttp2-sys
+    # Native bindings to the libssh2 library.
+    - libssh2-sys
+    # Bindings to the system libz library (also known as zlib).
+    - libz-sys
+    # Efficiently insert line separators.
+    - line-wrap
+    # A HashMap wrapper that holds key-value pairs in insertion order.
+    - linked-hash-map
+    # A lightweight logging facade for Rust.
+    - log
+    # A macro to evaluate, as a boolean, whether an expression matches a pattern.
+    - matches
+    # Safe interface to memchr.
+    - memchr
+    # Strongly Typed Mimes.
+    - mime
+    # Detectd a file's MIME type by its extension.
+    - mime_guess
+    # Lightweight non-blocking IO.
+    - mio
+    # A wrapper over a platform's native TLS implementation.
+    - native-tls
+    # Extensions to the standard library's networking types as proposed in RFC 1158.
+    - net2
+    # Cross-platform filesystem notification library.
+    - notify
+    # Get the number of CPUs on a machine.
+    - num_cpus
+    # Convert numbers into stack-allocated byte arrays.
+    - numtoa
+    # Single assignment cells and lazy values.
+    - once_cell
+    # Rust bindings for the Oniguruma regular expression library.
+    - onig
+    # Rust bindings for the Oniguruma regular expression library.
+    - onig_sys
+    # Open a file or link using the system default program.
+    - opener
+    # OpenSSL bindings.
+    - openssl
+    # OpenSSL FFI bindings.
+    - openssl-sys
+    # More compact and efficient implementations of the standard synchronization primitives.
+    - parking_lot
+    # Percent encoding and decoding.
+    - percent-encoding
+    # Graph data structure library that rovides graph types and graph algorithms.
+    - petgraph
+    # Crate for pins.
+    - pin-project
+    - pin-project-internal
+    - pin-project-lite
+    - pin-utils
+    # A rusty plist parser. Supports Serde serialization.
+    - plist
+    # Implementation of the crypto-simd API for x86.
+    - ppv-lite86
+    # Robust domain name parsing and RFC compliant email address validation.
+    - publicsuffix
+    # Quasi-quoting macro quote!(...)
+    - quote
+    # Print beautifully formatted files and strings to your terminal.
+    - prettyprint
+    # A generic connection pool.
+    # If you use diesel, then match the diesel dependency version.
+    - r2d2 = "= 0.8.4"
+    # Random number generation.
+    - rand = "0.6.5"
+    # Random number generator with ChaCha.
+    - rand_chacha
+    # Core random number generator traits and tools for implementation.
+    - rand_core
+    # Regular expressions implementation for Rust.
+    - regex
+    # Automata construction and matching using regular expressions.
+    - regex-automata
+    # A regular expression parser.
+    - regex-syntax
+    # A safe, reliable implementation of remove_dir_all for Windows.
+    - remove_dir_all
+    # Reqeust: higher level HTTP client library.
+    #
+    # Features:
+    #
+    #   * default-tls (enabled by default): Provides TLS support to connect over HTTPS.
+    #   * native-tls: Enables TLS functionality provided by native-tls.
+    #   * native-tls-vendored: Enables the vendored feature of native-tls.
+    #   * rustls-tls: Enables TLS functionality provided by rustls.
+    #   * blocking: Provides the blocking client API.
+    #   * cookies: Provides cookie session support.
+    #   * gzip: Provides response body gzip decompression.
+    #   * brotli: Provides response body brotli decompression.
+    #   * json: Provides serialization and deserialization for JSON bodies.
+    #   * stream: Adds support for futures::Stream.
+    #   * socks: Provides SOCKS5 proxy support.
+    #   * trust-dns: Enables a trust-dns async resolver instead of default threadpool using getaddrinfo.
+    #
+    - reqwest = { version, features = ["blocking", "cookies", "default-tls", "json", "stream"] }
+    # rust-argon2: Rust library for hashing passwords using Argon2 password-hashing function.
+    #
+    # For algorithm, we prefer Argon2 (preferrably Argon2id) over Bcrypt, Scrypt, PBKDF2.
+    #
+    # For Argon2 implementation, we prefer the crate rust-argon2 over:
+    #
+    #   * argonautica: more idiomatic, and faster, but wraps C, and needs a C compiler.
+    #   * argon2rs: more popular, but not updated recently, and lacks Argon2id.
+    #
+    - rust-argon2
+    # Rust compiler symbol demangling.
+    - rustc-demangle
+    # Automatically apply the suggestions made by rustc.
+    - rustfix
+    # Fast floating point to string conversion.
+    - ryu
+    # Safe wrappers for memory-accessing functions, like `std::ptr::copy()`.
+    - safemem
+    # Determine whether two file paths point to the same file.
+    - same-file
+    # A RAII scope guard that will run a given closure when it goes out of scope.
+    - scopeguard
+    # Security.framework bindings for macOS and iOS.
+    - security-framework
+    # Apple `Security.framework` low-level FFI bindings.
+    - security-framework-sys
+    # Serde: a framework for serializing and deserializing Rust data structures.
+    # The Serde crate has core APIs, including Serialize and Deserialize traits.
+    # Always required for Serde. The "derive" feature is only required when
+    # using #[derive(Serialize, Deserialize)] to make Serde work with structs
+    # and enums defined in your crate.
+    - serde = { version, features = ["derive"] }
+    # Macros 1.1 implementation of #[derive(Serialize, Deserialize)].
+    # Version must match the serde dependency version.
+    - serde_derive
+    # Serde JSON serialization file format.
+    - serde_json = { version, features = ["arbitrary_precision"] }
+    # Serde xml-rs based deserializer.
+    - serde-xml-rs
+    # Serde YAML support.
+    - serde_yaml
+    # Process command line according to parsing rules of UNIX shell.
+    - shell-words
+    # A simple logging facility for Rust's log crate.
+    - simplelog
+    # Efficient sized chunk datatypes.
+    - sized-chunks
+    # Pre-allocated storage for a uniform data type
+    - slab
+    # Small vector optimization: store up to a small number of items on the stack.
+    - smallvec
+    # String similarity metrics: Hamming, Levenshtein, OSA, Damerau-Levenshtein, Jaro, Jaro-Winkler, Sørensen-Dice.
+    - strsim
+    # Parse command line argument by defining a struct.
+    - structopt
+    # Parser for Rust source code.
+    - syn
+    # Library for high quality syntax highlighting and code intelligence using Sublime Text's grammars
+    - syntect
+    # TAR file reader and writer.
+    - tar
+    # A library for managing temporary files and directories.
+    - tempfile
+    # Cross platform library for writing colored text to a terminal.
+    - termcolor
+    # Safe bindings for the termios library.
+    - termios
+    # Library for word wrapping, indenting, and dedenting strings.
+    - textwrap
+    # Per-object thread-local storage.
+    - thread_local
+    # Date and time library. Fully interoperable with the standard library.
+    - time
+    # An event-driven, non-blocking I/O platform for writing asynchronous I/O backed applications.
+    - tokio = { version, features = ["full"] }
+    - tokio-tls
+    - tokio-util
+    # Rust encoder and decoder of TOML-formatted files and streams.
+    - toml
+    # Top for NGINX
+    - topngx
+    # Trait representing an asynchronous, request / response based, client or server.
+    - tower-service
+    # Unsafe helpers for working with raw trait objects.
+    - traitobject
+    # Exposes Typeable, for getting TypeIds at runtime.
+    - typeable
+    # Type-level numbers evaluated at compile time.
+    - typenum
+    # A case-insensitive wrapper around strings.
+    - unicase
+    # Implementation of the Unicode Bidirectional Algorithm.
+    - unicode-bidi
+    # Unicode string normalization.
+    - unicode-normalization
+    # Grapheme Cluster, Word and Sentence boundaries according to Unicode Standard Annex #29 rules.
+    - unicode-segmentation
+    # Determine displayed width of `char` and `str` types according to Unicode Standard Annex #11 rules.
+    - unicode-width
+    # Determine whether characters have the XID_Start or XID_Continue properties according to Unicode Standard Annex #31.
+    - unicode-xid
+    # URL library for Rust, based on the WHATWG URL Standard.
+    - url
+    # uuid: Generate and parse UUIDs.
+    #
+    # Version must match the diesel dependency version
+    #
+    #   * v1 - adds the Uuid::new_v1 function and the ability to create a V1 using an implementation of uuid::v1::ClockSequence (usually uuid::v1::Context) and a timestamp from time::timespec.
+    #   * v3 - adds the Uuid::new_v3 function and the ability to create a V3 UUID based on the MD5 hash of some data.
+    #   * v4 - adds the Uuid::new_v4 function and the ability to randomly generate a Uuid.
+    #   * v5 - adds the Uuid::new_v5 function and the ability to create a V5 UUID based on the SHA1 hash of some data.
+    #   * serde - adds the ability to serialize and deserialize a Uuid using the serde crate.
+    #
+    # You need to enable one of the following Cargo features together with v3, v4 or v5 feature if you're targeting wasm32 architecture:
+    #
+    #   * stdweb - enables support for OsRng on wasm32-unknown-unknown via stdweb combined with cargo-web
+    #   * wasm-bindgen - wasm-bindgen enables support for OsRng on wasm32-unknown-unknown via wasm-bindgen
+    #
+    - uuid = { version = "= 0.6.5", features = ["serde", "v1", "v3", "v4", "v5"] }
+    # A simple map based on a vector for small integer keys.
+    - vec_map
+    # Check the version of the installed/running rustc.
+    - version_check
+    # The uninhabited void type for use in statically impossible cases.
+    - void
+    # Recursively walk a directory.
+    - walkdir
+    # Detect when another Future wants a result.
+    - want
+    # Executes commands in response to file modifications.
+    - watchexec
+    # Display current network utilization by process, connection and remote IP/hostname.
+    - what
+    # XML library in pure Rust.
+    - xml-rs
+    # YAML parser for Rust.
+    - yaml-rust
