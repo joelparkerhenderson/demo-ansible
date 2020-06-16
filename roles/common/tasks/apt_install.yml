@@ -50,7 +50,6 @@
       - python3-geopandas
       - python3-numpy
       - python3-pip
-      - python-tox
       # Ruby-related
       - ruby
       - ruby-dev
