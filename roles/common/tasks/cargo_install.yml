@@ -46,6 +46,8 @@
     - ripgrep
     # An intuitive find & replace CLI.
     - sd
+    # Shared Compilation Cache.
+    - sccache
     # Fast minimal infinitely customizable prompt for any shell.
     - starship
     # Fetch and show tldr help pages for many CLI commands. Full featured offline client with caching support. .
