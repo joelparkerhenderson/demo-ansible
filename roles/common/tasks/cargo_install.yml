@@ -18,6 +18,8 @@
     - bat
     # A cross-platform graphical process/system monitor with a customizable interface and a multitude of features. Supports Linux, macOS, and Windows.
     - bottom
+    # Generate a Zeal/Dash docset for your rust package.
+    - cargo-docset
     # fd is a simple, fast and user-friendly alternative to find.
     - fd-find
     # Faster workspace management.
